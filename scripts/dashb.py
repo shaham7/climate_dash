@@ -5,6 +5,7 @@ from dash import dcc, html
 from dash.dependencies import Input, Output
 import plotly.express as px
 import plotly.graph_objects as go
+import prophet as pd
 from plotly.subplots import make_subplots
 
 class ClimateDashboard:
@@ -25,7 +26,7 @@ class ClimateDashboard:
         Create the dashboard layout with multiple interactive components
         """
         self.app.layout = html.Div([
-            html.H1("Climate Change Analysis Dashboard",
+            html.H1("Climate Change  Dashboard",
                    style={'textAlign': 'center'}),
             
             # Filters
@@ -157,7 +158,7 @@ class ClimateDashboard:
 if __name__ == "__main__":
     
     # Load the data
-    data = pd.read_csv('processed_data.csv')
+    data = pd.read_csv('./data/processed_data.csv')
     
     # Create dummy forecast data (replace with real forecast data)
     np.random.seed(42)  # for reproducibility
