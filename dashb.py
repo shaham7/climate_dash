@@ -398,6 +398,6 @@ class ClimateDashboard:
         self.app.run_server(debug=debug)
 
 if __name__ == "__main__":
-    data = pd.read_csv('./data/processed_data.csv')
+    data = pd.read_csv('./assets/processed_data.csv')
     dashboard = ClimateDashboard(data)
     dashboard.run_server(debug=False)
