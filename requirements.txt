@@ -1,0 +1,7 @@
+joblib @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_8ff7uji0v2/croot/joblib_1718217225309/work
+numpy @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_f2amvjkczw/croot/numpy_and_numpy_base_1725470317860/work/dist/numpy-2.0.1-cp312-cp312-macosx_11_0_arm64.whl#sha256=9ae27bab1fc22722387d6ba1b9614187f0c34bcfd5a8f07163b366e280617ebe
+scikit-learn @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_cdv8p6f6u3/croot/scikit-learn_1734547683501/work
+scipy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_38q_xncfpw/croot/scipy_1731623379533/work/dist/scipy-1.14.1-cp312-cp312-macosx_11_0_arm64.whl#sha256=31109bd786aa701f5c971d334b07054231058c525a58b01a07344aa41ae6b7f4
+setuptools==75.1.0
+threadpoolctl @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_efa5bvb6vi/croot/threadpoolctl_1719407806403/work
+wheel==0.44.0

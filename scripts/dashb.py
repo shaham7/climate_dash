@@ -43,7 +43,7 @@ class TimeSeriesModels:
         model = Prophet(yearly_seasonality=True)
         model.fit(data)
 
-        future = model.make_future_dataframe(periods=self.forecast_years, freq='Y')
+        future = model.make_future_dataframe(periods=self.forecast_years, freq='YE')
         forecast = model.predict(future)
         return forecast['yhat'].values, forecast['ds']
     
@@ -333,7 +333,7 @@ class ClimateDashboard:
             
             # Create future dates array for plotting
             historical_dates = emissions_df['ds']
-            future_dates = pd.date_range(start=historical_dates.iloc[-1], periods=7, freq='Y')[1:]
+            future_dates = pd.date_range(start=historical_dates.iloc[-1], periods=7, freq='YE')[1:]
             all_dates = pd.concat([historical_dates, pd.Series(future_dates)])
             
             # Calculate metrics (using only historical data)
@@ -400,4 +400,4 @@ class ClimateDashboard:
 if __name__ == "__main__":
     data = pd.read_csv('./data/processed_data.csv')
     dashboard = ClimateDashboard(data)
-    dashboard.run_server(debug=True)
+    dashboard.run_server(debug=False)
