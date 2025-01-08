@@ -259,7 +259,7 @@ class ClimateDashboard:
                     html.H4("Model Suitability:"),
                     html.Ul([
                         html.Li( [html.B("Best for Emissions:"), "Prophet, with excellent accuracy and a strong fit."]),
-                        html.Li( [html.B("For Temperature: "), "Neither model performs exceptionally due to high MAPE values. Further exploration of alternative models or data adjustments may be necessary."]),
+                        html.Li( [html.B("For Temperature: "), "Neither model performs exceptionally due to high MAPE values."]),
                     ]),
                 ], style={'textAlign': 'left'})
             ], style={'backgroundColor': '#ffffff', 'padding': '20px', 'margin': '20px', 'borderRadius': '10px'})
