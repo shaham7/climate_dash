@@ -105,7 +105,13 @@ class ClimateDashboard:
 
     def setup_layout(self):
         years = sorted(self.data['Year'].unique())
-        
+        dropdown_style = {
+            'width': '100%',
+            'padding': '3px',
+            'borderRadius': '3px',
+            'cursor': 'pointer',
+        }
+
         self.app.layout = html.Div([
             html.H1("Exploring Climate Trends and Forecasting Models"),
 
@@ -113,10 +119,8 @@ class ClimateDashboard:
             html.Div([
                 html.Div([
                     html.P(
-                        "I set out to create a Climate Change Dashboard "
-                        "to better understand climate change data and time series models like ARIMA and Prophet. "
-                        "The dashboard uses data from ten countries and the world, spanning metrics such as greenhouse gas (GHG) emissions, "
-                        "GDP per capita, renewable energy consumption, and global temperatures, with data collected from 1970 to 2023."
+                        "I set out to create this Dashboard to better understand climate change data and time series models like ARIMA and Prophet. "
+                        "I used data from ten countries and the world, spanning metrics such as greenhouse gas (GHG) emissions, GDP per capita, renewable energy consumption, and global temperatures, with data collected from 1970 to 2023."
                     ),
                     html.Ul([
                         html.Li("To deepen my understanding of building dashboards with Python and Dash."),
@@ -124,16 +128,14 @@ class ClimateDashboard:
                         html.Li("To provide insightful visualizations and comparisons of climate-related metrics across countries and over time."),
                     ]),
                     html.P(
-                        "This dashboard includes sections for time series analysis, comparative metric visualizations, "
-                        "details about forecasting models and model perfomance comparisons."
+                        "This dashboard includes sections for time series analysis, comparative metric visualizations, details about forecasting models and model perfomance comparisons."
                     ),
                     html.P(
-                        "(Data sources: Our World in Data, International Monetary Fund, The World Bank, and "
-                        "The Emissions Database for Global Atmospheric Research report.)",
+                        "Data sources: Our World in Data, International Monetary Fund, The World Bank, and The Emissions Database for Global Atmospheric Research report.",
                         style={'fontStyle': 'italic', 'fontSize': 'smaller'}
                     )
-                ], style={'textAlign': 'left'})
-            ], style={ 'padding': '20px', 'margin': '20px', 'borderRadius': '10px', 'textAlign': 'left'}),   
+                ], style={'textAlign': 'left', 'padding': '20px', 'margin': '20px'})
+            ], style={ 'padding': '20px', 'margin': '20px', 'textAlign': 'left'}),   
 
 
             # Time Series Section
@@ -145,7 +147,9 @@ class ClimateDashboard:
                         dcc.Dropdown(
                             id='country-selector',
                             options=[{'label': c, 'value': c} for c in sorted(self.data['Country'].unique())],
-                            value='United States'
+                            value='United States',
+                            style=dropdown_style, 
+                            searchable= False
                         )
                     ], style={'width': '30%', 'display': 'inline-block', 'padding':'20px'}),
                     
@@ -154,9 +158,11 @@ class ClimateDashboard:
                         dcc.Dropdown(
                             id='metric-selector',
                             options=[{'label': m.replace('_', ' '), 'value': m} for m in self.metrics],
-                            value='Emissions'
+                            value='Emissions',
+                            style=dropdown_style, 
+                            searchable= False
                         )
-                    ], style={'width': '30%', 'display': 'inline-block'}),
+                    ], style={'width': '30%', 'display': 'inline-block', 'margin': '20px'}),
                 ], style={'padding': '20px'}),
                 
                 dcc.Graph(id='time-series-plot'),
@@ -174,7 +180,9 @@ class ClimateDashboard:
                         dcc.Dropdown(
                             id='ranking-metric-selector',
                             options=[{'label': m.replace('_', ' '), 'value': m} for m in self.metrics],
-                            value='Emissions_per_capita'
+                            value='Emissions_per_capita',
+                            style=dropdown_style, 
+                            searchable= False
                         )
                     ], style={'width': '30%', 'display': 'inline-block', 'padding':'20px'}),
                     
@@ -183,7 +191,9 @@ class ClimateDashboard:
                         dcc.Dropdown(
                             id='ranking-year-selector',
                             options=[{'label': str(y), 'value': y} for y in years],
-                            value=max(years)
+                            value=max(years),
+                            style=dropdown_style, 
+                            searchable= False
                         )
                     ], style={'width': '30%', 'display': 'inline-block'}),
                 ], style={'padding': '20px'}),
@@ -211,7 +221,7 @@ class ClimateDashboard:
                         """
                     ),
                     
-                ], style={'textAlign': 'left'})
+                ], style={'textAlign': 'left', 'padding': '20px', 'margin': '20px'})
             ], style={'backgroundColor': '#ffffff', 'padding': '20px', 'margin': '20px', 'borderRadius': '10px'}),   
             
             # World Forecast Section
@@ -234,14 +244,14 @@ class ClimateDashboard:
                         html.Div([
                             html.H4("Emissions Forecast Metrics"),
                             html.Div(id='emissions-metrics-table')
-                        ], style={'width': '48%', 'display': 'inline-block'}),
+                        ], style={'width': '45%', 'display': 'inline-block', 'backgroundColor': '#f8f9fa', 'borderRadius': '10px', 'padding': '10px', 'margin': '10px'}),
                         
                         html.Div([
                             html.H4("Temperature Forecast Metrics"),
                             html.Div(id='temperature-metrics-table')
-                        ], style={'width': '48%', 'display': 'inline-block'})
+                        ], style={'width': '45%', 'display': 'inline-block', 'backgroundColor': '#f8f9fa', 'borderRadius': '10px', 'padding': '10px', 'margin': '10px'})
                     ])
-                ], style={'backgroundColor': '#f8f9fa', 'padding': '20px', 'margin': '20px', 'borderRadius': '10px'}),
+                ]),
 
             html.Div([
                     html.H4("Key Metrics:"),
@@ -254,14 +264,14 @@ class ClimateDashboard:
                     html.H4("Performance Summary:"),
                     html.Ul([
                         html.Li( [html.B("Emissions Forecast: "), "Prophet significantly outperforms ARIMA for emissions forecasting, with much lower errors and a near-perfect R², making it the preferred model for this metric."]),
-                        html.Li( [html.B("Temperature Forecast: "), "Both models show high relative errors for temperature predictions (MAPE > 47%). While Prophet has a slight edge in RMSE and R², neither model is ideal for this metric without further refinement."]),
+                        html.Li( [html.B("Temperature Forecast: "), "Both models show high relative errors for temperature predictions. While Prophet has a slight edge in RMSE and R², neither model is ideal for this metric without further refinement."]),
                     ]),
                     html.H4("Model Suitability:"),
                     html.Ul([
                         html.Li( [html.B("Best for Emissions:"), "Prophet, with excellent accuracy and a strong fit."]),
-                        html.Li( [html.B("For Temperature: "), "Neither model performs exceptionally due to high MAPE values."]),
+                        html.Li( [html.B("For Temperature: "), "Neither model performs exceptionally."]),
                     ]),
-                ], style={'textAlign': 'left'})
+                ], style={'textAlign': 'left', 'padding': '20px', 'margin': '20px'})
             ], style={'backgroundColor': '#ffffff', 'padding': '20px', 'margin': '20px', 'borderRadius': '10px'})
 
 
