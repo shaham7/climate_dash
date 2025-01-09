@@ -8,7 +8,7 @@ from plotly.subplots import make_subplots
 
 class ClimateDashboard:
     def __init__(self, data_path, forecasts_path, emissions_metrics_path, temp_metrics_path):
-        self.app = dash.Dash(__name__)
+        self.app = dash.Dash(__name__, server=True)
         self.data = pd.read_csv(data_path)
         self.forecasts = pd.read_csv(forecasts_path)
         self.emissions_metrics = pd.read_csv(emissions_metrics_path, index_col=0)
@@ -358,9 +358,9 @@ class ClimateDashboard:
 
 if __name__ == "__main__":
     dashboard = ClimateDashboard(
-        data_path='./assets/processed_data.csv',
+        data_path='processed_data.csv',
         forecasts_path='./output/forecasts.csv',
         emissions_metrics_path='./output/emissions_metrics.csv',
         temp_metrics_path='./output/temperature_metrics.csv'
     )
-    dashboard.run_server(debug=True)
+    dashboard.run_server(debug=False)
